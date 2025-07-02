@@ -215,3 +215,4 @@ function extractSrtFromRoteiro(fullRoteiroText) {
     srtContent = srtContent.replace(/^```srt\n/, '').replace(/\n```$/, '').trim();
     return srtContent;
 }
+// Pequena alteracao para forcar o Git a ver
