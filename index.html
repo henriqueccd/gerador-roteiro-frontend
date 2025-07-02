@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Gerador de Roteiros de IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <body>
+    <header>
+        <h1>Gerador de Roteiros para Canais Dark</h1>
+        <p>Crie histórias emocionantes e envolventes para o seu público.</p>
+    </header>
+
+    <main>
+        <section class="input-section">
+            <h2>1. Escolha o Tema da História:</h2>
+            <div id="theme-list">
+                <p>Carregando temas...</p>
+                </div>
+            <label for="selected-theme-input">Tema Escolhido (digite o número):</label>
+            <input type="number" id="selected-theme-input" placeholder="Ex: 1 (A Herança Maldita)">
+
+            <h2>2. Defina a Duração e a Estrutura:</h2>
+            <label for="video-duration">Duração Total do Vídeo (minutos):</label>
+            <input type="number" id="video-duration" placeholder="Ex: 30" min="5" max="120">
+
+            <label for="num-blocks">Número de Blocos da História:</label>
+            <input type="number" id="num-blocks" placeholder="Ex: 3" min="1" max="10">
+
+            <button id="generate-button">Gerar Roteiro</button>
+        </section>
+
+        <section class="output-section">
+            <h2>Roteiro Gerado:</h2>
+            <div id="generated-roteiro" class="roteiro-display">
+                <p>O roteiro aparecerá aqui após a geração.</p>
+            </div>
+            <div class="action-buttons">
+                <button id="copy-button">Copiar Roteiro</button>
+                <button id="download-srt-button">Baixar SRT</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Seu Gerador de Roteiros. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+    
+</body>
+</body>
+</html>

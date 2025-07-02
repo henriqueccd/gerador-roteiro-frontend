@@ -1,0 +1,141 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a; /* Fundo escuro para "dark channel" */
+    color: #e0e0e0; /* Texto claro */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #bbb;
+}
+
+main {
+    background-color: #2a2a2a;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    width: 90%;
+    max-width: 800px;
+    box-sizing: border-box; /* Para padding não aumentar a largura total */
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    color: #00bcd4; /* Um tom de azul ciano para destaque */
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #ccc;
+}
+
+input[type="number"],
+textarea {
+    width: calc(100% - 20px); /* 100% menos o padding */
+    padding: 10px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #3e3e3e;
+    color: #e0e0e0;
+    font-size: 1rem;
+    box-sizing: border-box; /* Para padding não aumentar a largura total */
+}
+
+input[type="number"]:focus,
+textarea:focus {
+    border-color: #00bcd4;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,188,212,0.5);
+}
+
+button {
+    background-color: #00bcd4;
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-right: 1rem;
+}
+
+button:hover {
+    background-color: #0097a7; /* Tom mais escuro no hover */
+}
+
+button:active {
+    background-color: #007c87;
+}
+
+.output-section .action-buttons {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.roteiro-display {
+    background-color: #1a1a1a;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 1.5rem;
+    min-height: 200px;
+    white-space: pre-wrap; /* Para preservar quebras de linha e espaços */
+    font-family: 'Roboto Mono', monospace; /* Fonte para código */
+    font-size: 0.95rem;
+    color: #f0f0f0;
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito grande */
+    max-height: 600px; /* Limita a altura para que não ocupe a tela toda */
+}
+
+#theme-list {
+    background-color: #3e3e3e;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    color: #f0f0f0;
+}
+
+footer {
+    margin-top: auto; /* Empurra o footer para o final da página */
+    padding: 1rem 0;
+    color: #888;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+    background-color: #333;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+}
