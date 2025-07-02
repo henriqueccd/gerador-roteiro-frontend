@@ -90,7 +90,7 @@ if (generateButton) { // Verificação para garantir que o botão existe
 
         // --- INÍCIO DA CONEXÃO COM O BACKEND PYTHON ---
         try {
-            const response = await fetch('http://127.0.0.1:5000/generate-roteiro', {
+            const response = await fetch('https://gerador-roteiro-backend.onrender.com/generate-roteiro', {
                 method: 'POST', // Estamos enviando dados, então é um POST
                 headers: {
                     'Content-Type': 'application/json' // Dizemos ao servidor que estamos enviando JSON
