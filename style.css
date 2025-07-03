@@ -52,6 +52,12 @@ h2 {
     padding-bottom: 0.5rem;
     margin-bottom: 1.5rem;
 }
+h3 { /* Para os subtítulos de thumbnail */
+    color: #00bcd4;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
 
 label {
     display: block;
@@ -61,6 +67,7 @@ label {
 }
 
 input[type="number"],
+input[type="text"], /* Adicionado estilo para input type text */
 textarea {
     width: calc(100% - 20px); /* 100% menos o padding */
     padding: 10px;
@@ -74,6 +81,7 @@ textarea {
 }
 
 input[type="number"]:focus,
+input[type="text"]:focus, /* Adicionado estilo para input type text no focus */
 textarea:focus {
     border-color: #00bcd4;
     outline: none;
@@ -120,25 +128,7 @@ button:active {
     max-height: 600px; /* Limita a altura para que não ocupe a tela toda */
 }
 
-#theme-list {
-    background-color: #3e3e3e;
-    border: 1px solid #555;
-    border-radius: 4px;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    color: #f0f0f0;
-}
-
-footer {
-    margin-top: auto; /* Empurra o footer para o final da página */
-    padding: 1rem 0;
-    color: #888;
-    font-size: 0.8rem;
-    text-align: center;
-    width: 100%;
-    background-color: #333;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
-}
+/* --- ESTILOS PARA A NOVA SEÇÃO DE EDIÇÃO --- */
 .edit-output-section {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -154,36 +144,49 @@ footer {
 
 .field-group {
     margin-bottom: 1.5rem; /* Espaçamento entre os grupos de campos */
+    display: flex; /* Para alinhar label e input/button */
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+    align-items: center; /* Alinha verticalmente */
 }
 
 .field-group label {
-    display: block; /* Garante que o label fique acima do campo */
+    flex: 1 1 100%; /* Ocupa 100% da largura, quebra linha */
     margin-bottom: 0.8rem;
     font-size: 1.05rem;
-    font-weight: bold;
-    color: #ccc;
 }
 
-/* Estilo para inputs de texto e textareas dentro da seção de edição */
 .edit-output-section input[type="text"],
 .edit-output-section textarea {
-    background-color: #3e3e3e; /* Fundo escuro */
-    border: 1px solid #555; /* Borda sutil */
-    border-radius: 4px;
-    color: #e0e0e0; /* Cor do texto digitado */
-    padding: 10px;
-    font-size: 1rem;
-    width: calc(100% - 20px); /* Garante largura total menos padding */
-    box-sizing: border-box; /* Inclui padding na largura total */
-    transition: border-color 0.3s ease; /* Transição suave na borda */
+    flex: 1 1 auto; /* Ocupa o espaço restante */
+    min-width: 0; /* Permite que o flex item diminua */
+    margin-right: 10px; /* Espaço entre o campo e o botão */
 }
 
-/* Estilo quando o campo está focado (clicado) */
-.edit-output-section input[type="text"]:focus,
-.edit-output-section textarea:focus {
-    border-color: #00bcd4; /* Borda colorida ao focar */
-    outline: none; /* Remove a borda padrão do navegador */
-    box-shadow: 0 0 5px rgba(0,188,212,0.5); /* Sombra suave */
+/* Estilo para os botões individuais de copiar */
+.field-group button.copy-field-button {
+    background-color: #007c87; /* Um tom de azul esverdeado mais escuro */
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: normal;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* Não encolhe o botão */
+    height: 40px; /* Altura fixa para alinhar com input text */
+    margin-top: 0; /* Reseta margem que poderia vir de outros estilos de botão */
+}
+
+.field-group textarea + button.copy-field-button { /* Ajuste para alinhar com textarea */
+    height: auto; /* Permite que o botão se ajuste à altura do textarea */
+    align-self: flex-start; /* Alinha o botão no topo do textarea */
+    padding: 10px 15px;
+}
+
+
+.field-group button.copy-field-button:hover {
+    background-color: #005f6b; /* Fica mais escuro no hover */
 }
 
 .thumbnail-elements-group {
@@ -192,4 +195,15 @@ footer {
     border-radius: 8px;
     background-color: #303030; /* Fundo ligeiramente diferente */
     margin-top: 2rem;
+}
+
+footer {
+    margin-top: auto; /* Empurra o footer para o final da página */
+    padding: 1rem 0;
+    color: #888;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+    background-color: #333;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
 }

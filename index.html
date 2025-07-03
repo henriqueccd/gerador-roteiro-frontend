@@ -22,7 +22,7 @@
             <input type="number" id="selected-theme-input" placeholder="Ex: 1">
 
             <h2>2. Defina a Estrutura:</h2>
-            <label for="num-blocks">Número de Blocos da História:</label>
+            <label for="video-duration">Duração Total do Vídeo (minutos):</label> <input type="number" id="video-duration" placeholder="Ex: 30" min="5" max="120"> <label for="num-blocks">Número de Blocos da História:</label>
             <input type="number" id="num-blocks" placeholder="Ex: 3" min="1" max="10">
 
             <button id="generate-button">Gerar Roteiro</button>
@@ -45,16 +45,19 @@
             <div class="field-group">
                 <label for="edited-titles">Sugestões de Títulos (separadas por linha):</label>
                 <textarea id="edited-titles" rows="5"></textarea>
+                <button class="copy-field-button" data-target="edited-titles">Copiar Títulos</button>
             </div>
 
             <div class="field-group">
                 <label for="edited-headline">Headline Chamativa (Gancho):</label>
                 <textarea id="edited-headline" rows="2"></textarea>
+                <button class="copy-field-button" data-target="edited-headline">Copiar Headline</button>
             </div>
 
             <div class="field-group">
                 <label for="edited-cta">Chamada à Ação Final (CTA):</label>
                 <textarea id="edited-cta" rows="3"></textarea>
+                <button class="copy-field-button" data-target="edited-cta">Copiar CTA</button>
             </div>
 
             <div class="thumbnail-elements-group">
@@ -62,18 +65,22 @@
                 <div class="field-group">
                     <label for="thumb-name">Nome do Personagem Principal:</label>
                     <input type="text" id="thumb-name">
+                    <button class="copy-field-button" data-target="thumb-name">Copiar Nome</button>
                 </div>
                 <div class="field-group">
                     <label for="thumb-age">Idade do Personagem Principal:</label>
                     <input type="text" id="thumb-age">
+                    <button class="copy-field-button" data-target="thumb-age">Copiar Idade</button>
                 </div>
                 <div class="field-group">
                     <label for="thumb-characteristics">Características Físicas:</label>
                     <textarea id="thumb-characteristics" rows="3"></textarea>
+                    <button class="copy-field-button" data-target="thumb-characteristics">Copiar Características</button>
                 </div>
                 <div class="field-group">
                     <label for="thumb-visual-element">Elemento Visual Chave:</label>
                     <textarea id="thumb-visual-element" rows="3"></textarea>
+                    <button class="copy-field-button" data-target="thumb-visual-element">Copiar Elemento Visual</button>
                 </div>
             </div>
         </section>
