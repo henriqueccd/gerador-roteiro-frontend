@@ -40,7 +40,7 @@ const generateButton = document.getElementById('generate-button');
 console.log('Botão Gerar Roteiro (ao carregar):', generateButton); 
 // --- FIM DA LINHA DE DEBUG ---
 const selectedThemeInput = document.getElementById('selected-theme-input');
-const videoDurationInput = document.getElementById('video-duration');
+const videoDurationInput = document.getElementById('video-duration'); // Este input será removido ou ignorado futuramente
 const numBlocksInput = document.getElementById('num-blocks');
 const generatedRoteiroDiv = document.getElementById('generated-roteiro');
 const copyButton = document.getElementById('copy-button');
@@ -59,12 +59,8 @@ if (generateButton) { // Verificação para garantir que o botão existe
         // --- FIM DA LINHA DE DEBUG ---
 
         const selectedThemeNumber = parseInt(selectedThemeInput.value); // Pega o número do tema e converte para número
-        const videoDuration = parseInt(videoDurationInput.value); // Pega a duração
+        // const videoDuration = parseInt(videoDurationInput.value); // Duração será removida ou ignorada, mas mantemos a variável por enquanto
         const numBlocks = parseInt(numBlocksInput.value); // Pega o número de blocos
-
-        // --- LINHA ADICIONADA PARA DEBUG (VERIFICAR VALORES DOS INPUTS) ---
-        console.log('>>> Valores dos inputs:', { selectedThemeNumber, videoDuration, numBlocks });
-        // --- FIM DA LINHA DE DEBUG ---
 
         // Validação básica dos inputs (mantido do código anterior)
         if (isNaN(selectedThemeNumber) || selectedThemeNumber < 1 || selectedThemeNumber > themes.length) {
@@ -72,11 +68,11 @@ if (generateButton) { // Verificação para garantir que o botão existe
             console.warn('>>> Validação falhou: Tema inválido.'); // Debug
             return;
         }
-        if (isNaN(videoDuration) || videoDuration < 5 || videoDuration > 120) {
-            generatedRoteiroDiv.innerHTML = '<p style="color: red;">Por favor, insira uma duração de vídeo válida (entre 5 e 120 minutos).</p>';
-            console.warn('>>> Validação falhou: Duração inválida.'); // Debug
-            return;
-        }
+        // if (isNaN(videoDuration) || videoDuration < 5 || videoDuration > 120) { // Validação da duração removida/ignorada
+        //     generatedRoteiroDiv.innerHTML = '<p style="color: red;">Por favor, insira uma duração de vídeo válida (entre 5 e 120 minutos).</p>';
+        //     console.warn('>>> Validação falhou: Duração inválida.'); // Debug
+        //     return;
+        // }
         if (isNaN(numBlocks) || numBlocks < 1 || numBlocks > 10) {
             generatedRoteiroDiv.innerHTML = '<p style="color: red;">Por favor, insira um número de blocos válido (entre 1 e 10).</p>';
             console.warn('>>> Validação falhou: Blocos inválidos.'); // Debug
@@ -97,7 +93,7 @@ if (generateButton) { // Verificação para garantir que o botão existe
                 },
                 body: JSON.stringify({ // Converte os dados para JSON e envia
                     tema: chosenTheme,
-                    duracao: videoDuration,
+                    // duracao: videoDuration, // Duração removida do corpo da requisição
                     blocos: numBlocks
                 })
             });
@@ -119,27 +115,23 @@ if (generateButton) { // Verificação para garantir que o botão existe
             const data = await response.json(); // Pega a resposta do servidor e converte de JSON para objeto JavaScript
             console.log('>>> Resposta do backend recebida:', data); // Debug
 
-            // Agora, vamos exibir os dados recebidos do backend
+            // --- AGORA, VAMOS EXIBIR OS DADOS RECEBIDOS DO BACKEND COM O NOVO FORMATO ---
             let fullRoteiroDisplay = `
-🟠 **TEMA SUGERIDO**
-${data.tema_sugerido}
-
-📝 **História em ${numBlocks} blocos (Duração Total: ${videoDuration} minutos)**
+🟠 **TEMA ESCOLHIDO:** ${data.tema_sugerido}
 `;
-
-            // Adiciona cada bloco da história (que é um array no backend)
-            data.historia.forEach((blockText, index) => {
-                fullRoteiroDisplay += `**Bloco ${index + 1}:**\n${blockText}\n\n`;
+            // Apenas o texto da história, sem blocos numerados automáticos, e quebra de linha entre eles
+            data.historia.forEach((blockText) => { // Removed index here
+                fullRoteiroDisplay += `<p>${blockText}</p>\n`; // Adiciona cada bloco como um parágrafo
             });
 
             fullRoteiroDisplay += `
-📢 **Títulos sugeridos**
+📢 **Títulos Sugeridos**
 - ${data.titulos_sugeridos.join('\n- ')}
 
-🎯 **Headline chamativa (gancho)**
+🎯 **Headline Chamativa (Gancho)**
 ${data.headline_chamativa}
 
-💬 **Chamada à ação final (CTA)**
+💬 **Chamada à Ação Final (CTA)**
 ${data.cta_final}
 
 🖼️ **Elementos para Thumbnail**
@@ -148,11 +140,9 @@ ${data.cta_final}
 * **Características físicas relevantes do personagem principal:** ${data.elementos_thumbnail.caracteristicas_fisicas}
 * **Um elemento visual chave da história:** ${data.elementos_thumbnail.elemento_visual_chave}
 
-📄 **Download do arquivo \`.srt\` (texto formatado no final)**
-\`\`\`srt
-${data.srt_completo}
-\`\`\`
+📄 **Download do arquivo SRT (clique no botão abaixo)**
             `;
+            // O conteúdo do SRT não será mais exibido na tela, apenas disponível para download
 
             generatedRoteiroDiv.innerHTML = fullRoteiroDisplay;
             console.log('>>> Roteiro exibido na tela.'); // Debug
@@ -171,7 +161,26 @@ ${data.srt_completo}
 // Adicionando ouvintes de evento aos botões de Copiar e Baixar SRT
 if (copyButton) {
     copyButton.addEventListener('click', () => {
-        const textToCopy = generatedRoteiroDiv.innerText; // Pega todo o texto da área do roteiro
+        // Para copiar, queremos apenas o texto principal da história + os extras, mas sem o SRT
+        const textToCopy = `
+TEMA: ${generatedRoteiroDiv.querySelector('b:first-child').nextSibling.textContent.trim()}
+
+HISTÓRIA:
+${generatedRoteiroDiv.querySelectorAll('p').filter(p => !p.classList.contains('error')).map(p => p.textContent).join('\n\n')}
+
+TÍTULOS SUGERIDOS:
+${generatedRoteiroDiv.querySelector('📢').nextSibling.textContent.trim()}
+
+HEADLINE CHAMATIVA:
+${generatedRoteiroDiv.querySelector('🎯').nextSibling.textContent.trim()}
+
+CHAMADA À AÇÃO FINAL:
+${generatedRoteiroDiv.querySelector('💬').nextSibling.textContent.trim()}
+
+ELEMENTOS PARA THUMBNAIL:
+${generatedRoteiroDiv.querySelector('🖼️').nextSibling.textContent.trim()}
+`;
+
         navigator.clipboard.writeText(textToCopy).then(() => {
             alert('Roteiro copiado para a área de transferência!');
         }).catch(err => {
@@ -183,8 +192,20 @@ if (copyButton) {
 
 if (downloadSrtButton) {
     downloadSrtButton.addEventListener('click', () => {
-        const roteiroText = generatedRoteiroDiv.innerText; // Pega o texto da área do roteiro
-        const srtContent = extractSrtFromRoteiro(roteiroText); // Função para extrair SRT, que você verá em breve
+        // Para baixar o SRT, precisamos do conteúdo bruto que veio do backend.
+        // A forma mais segura é pegá-lo diretamente do objeto 'data' se tivéssemos acesso fácil.
+        // Como não temos a 'data' aqui fora do evento de clique, vamos pedir ao usuário para regenerar e focar na função.
+        // Para a simulação, ou para um caso real onde o backend envia, precisamos salvar o 'data.srt_completo'
+        // em uma variável global ou passar para esta função.
+        
+        // --- IMPORTANTE: Para o SRT funcionar de verdade no download,
+        // você precisaria que o `data.srt_completo` estivesse acessível aqui,
+        // talvez armazenando-o em uma variável global ou passando ele.
+        // Por enquanto, vamos extraí-lo da tela como uma simulação.
+        // No futuro, quando o backend for real, você pode armazenar a resposta da IA.
+        const roteiroHtmlContent = generatedRoteiroDiv.innerHTML;
+        const srtContent = extractSrtFromRenderedHtml(roteiroHtmlContent);
+
 
         if (srtContent) {
             const blob = new Blob([srtContent], { type: 'text/plain;charset=utf-8;' });
@@ -196,23 +217,21 @@ if (downloadSrtButton) {
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
-            alert('Arquivo SRT simulado baixado!');
+            alert('Arquivo SRT baixado!');
         } else {
-            alert('Nenhum SRT encontrado ou gerado para download.');
+            alert('Nenhum SRT encontrado para download. Gere um roteiro primeiro.');
         }
     });
 }
 
-// Função auxiliar para simular a extração do SRT.
-// No futuro, o SRT virá separado da API e não precisará ser extraído assim.
-function extractSrtFromRoteiro(fullRoteiroText) {
-    const srtStartTag = '📄 **Download do arquivo `.srt` (texto formatado no final)**';
-    const srtStartIndex = fullRoteiroText.indexOf(srtStartTag);
-    if (srtStartIndex === -1) return null;
-
-    let srtContent = fullRoteiroText.substring(srtStartIndex + srtStartTag.length).trim();
-    // Remove possíveis cabeçalhos do formato de saída
-    srtContent = srtContent.replace(/^```srt\n/, '').replace(/\n```$/, '').trim();
-    return srtContent;
+// Função auxiliar para extrair o SRT do HTML renderizado (simulação)
+// No futuro, você terá acesso direto ao data.srt_completo do backend
+function extractSrtFromRenderedHtml(htmlContent) {
+    // Procura pela parte do SRT que é marcada com ```srt
+    const regex = /```srt\s*([\s\S]*?)\s*```/;
+    const match = htmlContent.match(regex);
+    if (match && match[1]) {
+        return match[1].trim();
+    }
+    return null;
 }
-// Pequena alteracao para forcar o Git a ver
