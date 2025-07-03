@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <body>
     <header>
         <h1>Gerador de Roteiros para Canais Dark</h1>
         <p>Crie histórias emocionantes e envolventes para o seu público.</p>
@@ -18,14 +17,11 @@
             <h2>1. Escolha o Tema da História:</h2>
             <div id="theme-list">
                 <p>Carregando temas...</p>
-                </div>
+            </div>
             <label for="selected-theme-input">Tema Escolhido (digite o número):</label>
-            <input type="number" id="selected-theme-input" placeholder="Ex: 1 (A Herança Maldita)">
+            <input type="number" id="selected-theme-input" placeholder="Ex: 1">
 
-            <h2>2. Defina a Duração e a Estrutura:</h2>
-            <label for="video-duration">Duração Total do Vídeo (minutos):</label>
-            <input type="number" id="video-duration" placeholder="Ex: 30" min="5" max="120">
-
+            <h2>2. Defina a Estrutura:</h2>
             <label for="num-blocks">Número de Blocos da História:</label>
             <input type="number" id="num-blocks" placeholder="Ex: 3" min="1" max="10">
 
@@ -42,13 +38,50 @@
                 <button id="download-srt-button">Baixar SRT</button>
             </div>
         </section>
-    </main>
+
+        <section class="edit-output-section">
+            <h2>Ajuste as Sugestões Finais:</h2>
+
+            <div class="field-group">
+                <label for="edited-titles">Sugestões de Títulos (separadas por linha):</label>
+                <textarea id="edited-titles" rows="5"></textarea>
+            </div>
+
+            <div class="field-group">
+                <label for="edited-headline">Headline Chamativa (Gancho):</label>
+                <textarea id="edited-headline" rows="2"></textarea>
+            </div>
+
+            <div class="field-group">
+                <label for="edited-cta">Chamada à Ação Final (CTA):</label>
+                <textarea id="edited-cta" rows="3"></textarea>
+            </div>
+
+            <div class="thumbnail-elements-group">
+                <h3>Elementos para Thumbnail:</h3>
+                <div class="field-group">
+                    <label for="thumb-name">Nome do Personagem Principal:</label>
+                    <input type="text" id="thumb-name">
+                </div>
+                <div class="field-group">
+                    <label for="thumb-age">Idade do Personagem Principal:</label>
+                    <input type="text" id="thumb-age">
+                </div>
+                <div class="field-group">
+                    <label for="thumb-characteristics">Características Físicas:</label>
+                    <textarea id="thumb-characteristics" rows="3"></textarea>
+                </div>
+                <div class="field-group">
+                    <label for="thumb-visual-element">Elemento Visual Chave:</label>
+                    <textarea id="thumb-visual-element" rows="3"></textarea>
+                </div>
+            </div>
+        </section>
+        </main>
 
     <footer>
         <p>&copy; 2025 Seu Gerador de Roteiros. Todos os direitos reservados.</p>
     </footer>
     <script src="script.js"></script>
-    
-</body>
 </body>
 </html>

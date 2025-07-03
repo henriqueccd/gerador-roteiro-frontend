@@ -139,3 +139,57 @@ footer {
     background-color: #333;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
 }
+.edit-output-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px dashed #555; /* Linha divisória para separar visualmente */
+}
+
+.edit-output-section h2, .edit-output-section h3 {
+    color: #00bcd4; /* Cor de destaque para os títulos da seção */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+}
+
+.field-group {
+    margin-bottom: 1.5rem; /* Espaçamento entre os grupos de campos */
+}
+
+.field-group label {
+    display: block; /* Garante que o label fique acima do campo */
+    margin-bottom: 0.8rem;
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #ccc;
+}
+
+/* Estilo para inputs de texto e textareas dentro da seção de edição */
+.edit-output-section input[type="text"],
+.edit-output-section textarea {
+    background-color: #3e3e3e; /* Fundo escuro */
+    border: 1px solid #555; /* Borda sutil */
+    border-radius: 4px;
+    color: #e0e0e0; /* Cor do texto digitado */
+    padding: 10px;
+    font-size: 1rem;
+    width: calc(100% - 20px); /* Garante largura total menos padding */
+    box-sizing: border-box; /* Inclui padding na largura total */
+    transition: border-color 0.3s ease; /* Transição suave na borda */
+}
+
+/* Estilo quando o campo está focado (clicado) */
+.edit-output-section input[type="text"]:focus,
+.edit-output-section textarea:focus {
+    border-color: #00bcd4; /* Borda colorida ao focar */
+    outline: none; /* Remove a borda padrão do navegador */
+    box-shadow: 0 0 5px rgba(0,188,212,0.5); /* Sombra suave */
+}
+
+.thumbnail-elements-group {
+    border: 1px dashed #444; /* Borda tracejada para agrupar */
+    padding: 1.5rem;
+    border-radius: 8px;
+    background-color: #303030; /* Fundo ligeiramente diferente */
+    margin-top: 2rem;
+}
